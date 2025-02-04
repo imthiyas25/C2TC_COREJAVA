@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - Shopping Mall</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+    
+    <div class="container mx-auto p-4">
+        <!-- Navbar -->
+        <nav class="flex justify-between items-center p-4 bg-blue-600 text-white rounded-lg">
+            <h1 class="text-2xl font-bold">Shopping Mall</h1>
+            <button onclick="toggleDarkMode()" class="bg-white text-blue-600 px-3 py-1 rounded">Toggle Mode</button>
+        </nav>
+
+        <!-- Customer Info -->
+        <div class="mt-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
+            <h2 class="text-xl font-bold">Welcome, <span id="customerName">Mohamed Imthiyas</span>!</h2>
+            <p>Email: <span id="customerEmail">itsimthiyas@gmai.com</span></p>
+            <p>Phone: <span id="customerPhone">+91 7904062696</span></p>
+        </div>
+
+        <!-- Shopping Cart -->
+        <div class="mt-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
+            <h2 class="text-xl font-bold">Your Cart</h2>
+            <ul id="cartItems" class="mt-2 space-y-2">
+                <li class="flex justify-between bg-gray-100 dark:bg-gray-700 p-3 rounded">Smartphone - ₹20,000 <button class="text-red-500" onclick="removeItem(this)">Remove</button></li>
+            </ul>
+            <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded" onclick="checkout()">Checkout</button>
+        </div>
+
+        <!-- Wishlist -->
+        <div class="mt-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
+            <h2 class="text-xl font-bold">Your Wishlist</h2>
+            <ul id="wishlistItems" class="mt-2 space-y-2">
+                <li class="flex justify-between bg-gray-100 dark:bg-gray-700 p-3 rounded">Leather Wallet - ₹1,500 <button class="text-blue-500" onclick="addToCart(this)">Add to Cart</button></li>
+            </ul>
+        </div>
+
+        <!-- Order History -->
+        <div class="mt-6 p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
+            <h2 class="text-xl font-bold">Order History</h2>
+            <ul class="mt-2 space-y-2">
+                <li class="bg-gray-100 dark:bg-gray-700 p-3 rounded">Order #12345 - Delivered</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+        }
+        
+        function removeItem(element) {
+            element.parentElement.remove();
+        }
+
+        function addToCart(element) {
+            let itemText = element.parentElement.textContent.replace('Add to Cart', '').trim();
+            let cart = document.getElementById("cartItems");
+            let newItem = document.createElement("li");
+            newItem.innerHTML = `<li class='flex justify-between bg-gray-100 dark:bg-gray-700 p-3 rounded'>${itemText} <button class='text-red-500' onclick='removeItem(this)'>Remove</button></li>`;
+            cart.appendChild(newItem);
+            element.parentElement.remove();
+        }
+
+        function checkout() {
+            alert("Proceeding to checkout!");
+        }
+    </script>
+</body>
+</html>
